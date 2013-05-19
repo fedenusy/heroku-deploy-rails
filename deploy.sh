@@ -20,13 +20,6 @@ has_remote()
     git remote | grep -qs "$REMOTE"
 }
 
-run_security_checks()
-{
-    if which brakeman > /dev/null; then
-        brakeman
-    fi
-}
-
 show_undeployed_changes()
 {
     git fetch $REMOTE
@@ -87,7 +80,6 @@ COMMAND="$2"
 
 [ ! has_remote ] && usage
 
-run_security_checks
 show_undeployed_changes
 backup_database
 deploy_changes
